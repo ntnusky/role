@@ -9,5 +9,5 @@ class role::controller {
   include ::profile::rabbitmq
   
   # Openstack controller
-  include ::profile::keystone
+  include ::profile::openstack::keystone
 }
