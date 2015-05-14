@@ -10,5 +10,8 @@ class role::controller {
   
   # Openstack controller
   include ::profile::openstack::keystone
+  include ::profile::openstack::glance
+  
+  # Ceph
   include ::profile::ceph::monitor
 }
