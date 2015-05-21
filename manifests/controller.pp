@@ -11,6 +11,7 @@ class role::controller {
   # Openstack controller
   include ::profile::openstack::keystone
   include ::profile::openstack::glance
+  include ::profile::openstack::novacontroller
   #include ::profile::openstack::neutronserver
   
   # Ceph
