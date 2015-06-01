@@ -7,7 +7,7 @@ class role::controller {
   include ::profile::keepalived
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
-  include ::profile::corosync
+  #include ::profile::corosync
   
   # Openstack controller
   include ::profile::openstack::keystone
