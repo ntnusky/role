@@ -14,6 +14,7 @@ class role::controller {
   include ::profile::openstack::glance
   include ::profile::openstack::novacontroller
   include ::profile::openstack::neutronserver
+  include ::profile::openstack::neutronnetworks
   
   # Ceph
   include ::profile::ceph::monitor
