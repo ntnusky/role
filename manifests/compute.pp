@@ -4,6 +4,7 @@ class role::compute {
   include ::profile::users
   include ::profile::ceph::client
   include ::profile::norpf
+  include ::profile::nfs::client
 
   # Openstack compute
   include ::profile::openstack::neutronagent

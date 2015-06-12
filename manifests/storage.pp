@@ -3,4 +3,5 @@ class role::storage {
   include ::profile::baseconfig
   include ::profile::users
   include ::profile::ceph::osd
+  include ::profile::nfs::client
 }
