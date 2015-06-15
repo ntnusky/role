@@ -1,4 +1,4 @@
-class role::controller {
+class role::controller1 {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::users

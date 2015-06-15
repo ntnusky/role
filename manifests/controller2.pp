@@ -1,4 +1,4 @@
-class role::controller {
+class role::controller2 {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::users
@@ -10,7 +10,4 @@ class role::controller {
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
   include ::profile::norpf
-
-  # Ceph
-  include ::profile::ceph::monitor
 }
