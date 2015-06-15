@@ -3,4 +3,5 @@ class role::monitor {
   include ::profile::baseconfig
   include ::profile::users
   include ::profile::nfs::client
+  include ::profile::monitoring::elk
 }
