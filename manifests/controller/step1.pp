@@ -1,4 +1,4 @@
-class role::controller3 {
+class role::controller::step1 {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::users
@@ -7,10 +7,6 @@ class role::controller3 {
   # Include base services needed by openstack
   include ::profile::memcache
   include ::profile::keepalived
-  include ::profile::mysqlcluster
   include ::profile::rabbitmq
   include ::profile::norpf
-
-  # Ceph
-  include ::profile::ceph::monitor
 }
