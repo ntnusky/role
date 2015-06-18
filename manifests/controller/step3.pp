@@ -1,8 +1,7 @@
-class role::controller3 {
+class role::controller::step3 {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::users
-  include ::profile::nfs::client
   
   # Include base services needed by openstack
   include ::profile::memcache
