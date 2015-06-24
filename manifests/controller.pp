@@ -10,7 +10,6 @@ class role::controller {
   include ::profile::rabbitmq
   include ::profile::norpf
   include ::profile::monitoring::logstashforwarder
-  #include ::profile::corosync
   
   # Openstack controller
   include ::profile::openstack::keystone
@@ -18,7 +17,7 @@ class role::controller {
   include ::profile::openstack::novacontroller
   include ::profile::openstack::neutronserver
   include ::profile::openstack::horizon
-  #include ::profile::openstack::neutronnetworks
+  include ::profile::openstack::cinder
   
   # Ceph
   include ::profile::ceph::monitor
