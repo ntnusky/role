@@ -5,5 +5,5 @@ class role::monitor {
   include ::profile::norpf
   include ::profile::monitoring::elk
   include ::profile::monitoring::reverseproxy
-#  include ::profile::monitoring::logstashforwarder
+  include ::profile::monitoring::logstashforwarder
 }

@@ -4,5 +4,5 @@ class role::storage {
   include ::profile::users
   include ::profile::norpf
   include ::profile::ceph::osd
-#  include ::profile::monitoring::logstashforwarder
+  include ::profile::monitoring::logstashforwarder
 }

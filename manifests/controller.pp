@@ -9,7 +9,7 @@ class role::controller {
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
   include ::profile::norpf
-#  include ::profile::monitoring::logstashforwarder
+  include ::profile::monitoring::logstashforwarder
   #include ::profile::corosync
   
   # Openstack controller
