@@ -4,4 +4,5 @@ class role::manager {
   include ::profile::users
   include ::profile::norpf
   include ::profile::monitoring::logstashforwarder
+  include ::profile::managerbackups
 }
