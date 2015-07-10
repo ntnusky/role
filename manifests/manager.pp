@@ -6,4 +6,5 @@ class role::manager {
   include ::profile::monitoring::logstashforwarder
   include ::profile::managerbackups
   include ::profile::monitoring::icingaclient
+  include ::profile::puppetdb
 }
