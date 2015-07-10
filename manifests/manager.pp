@@ -5,4 +5,5 @@ class role::manager {
   include ::profile::norpf
   include ::profile::monitoring::logstashforwarder
   include ::profile::managerbackups
+  include ::profile::monitoring::icingaclient
 }

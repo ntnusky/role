@@ -5,4 +5,5 @@ class role::storage {
   include ::profile::norpf
   include ::profile::ceph::osd
   include ::profile::monitoring::logstashforwarder
+  include ::profile::monitoring::icingaclient
 }
