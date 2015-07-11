@@ -20,6 +20,7 @@ class role::controller {
   include ::profile::openstack::neutronserver
   include ::profile::openstack::horizon
   include ::profile::openstack::cinder
+  include ::profile::openstack::heat
   #include ::profile::openstack::neutronnetworks
   
   # Ceph
