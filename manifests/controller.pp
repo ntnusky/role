@@ -10,7 +10,7 @@ class role::controller {
   include ::profile::rabbitmq
   include ::profile::norpf
   include ::profile::monitoring::logstashforwarder
-  include ::profile::monitoring::icingaclient
+#  include ::profile::monitoring::icingaclient
   #include ::profile::corosync
   
   # Openstack controller
