@@ -12,6 +12,7 @@ class role::controller {
   include ::profile::monitoring::logstashforwarder
   include ::profile::monitoring::icingaclient
   #include ::profile::corosync
+  include ::profile::munin::node
   
   # Openstack controller
   include ::profile::openstack::keystone

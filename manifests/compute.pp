@@ -6,6 +6,7 @@ class role::compute {
   include ::profile::norpf
   include ::profile::monitoring::logstashforwarder
   include ::profile::monitoring::icingaclient
+  include ::profile::munin::node
 
   # Openstack compute
   include ::profile::openstack::neutronagent
