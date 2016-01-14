@@ -26,4 +26,5 @@ class role::controller {
   
   # Ceph
   include ::profile::ceph::monitor
+  include ::profile::munin::plugin::ceph
 }
