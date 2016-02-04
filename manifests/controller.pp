@@ -23,6 +23,7 @@ class role::controller {
   include ::profile::openstack::cinder
   include ::profile::openstack::heat
   #include ::profile::openstack::neutronnetworks
+  include ::profile::munin::plugin::nova
   
   # Ceph
   include ::profile::ceph::monitor
