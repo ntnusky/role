@@ -8,7 +8,7 @@ class role::storage {
   include ::profile::ceph::osd
 
   # Monitoring
-  include ::profile::monitoring::logstashforwarder
-  include ::profile::monitoring::icingaclient
-  include ::profile::munin::node
+  #include ::profile::monitoring::logstashforwarder
+  #include ::profile::monitoring::icingaclient
+  #include ::profile::munin::node
 }
