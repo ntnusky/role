@@ -3,9 +3,13 @@ class role::manager {
   include ::profile::baseconfig
   include ::profile::users
   include ::profile::norpf
-  include ::profile::monitoring::logstashforwarder
-  include ::profile::managerbackups
-  include ::profile::monitoring::icingaclient
-  include ::profile::puppetdb
-  include ::profile::munin::node
+
+  # Monitoring
+  #include ::profile::monitoring::logstashforwarder
+  #include ::profile::monitoring::icingaclient
+  #include ::profile::munin::node
+
+  # Manager-specific
+  #include ::profile::managerbackups
+  #include ::profile::puppetdb
 }
