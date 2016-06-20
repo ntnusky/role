@@ -7,10 +7,10 @@ class role::manager {
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
   #include ::profile::monitoring::icingaclient
-  #include ::profile::munin::node
+  include ::profile::munin::node
 
   # Manager-specific
   #include ::profile::managerbackups
-  #include ::profile::puppetdb
+  include ::profile::puppetdb
   include ::profile::tftpserver
 }
