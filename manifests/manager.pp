@@ -10,7 +10,7 @@ class role::manager {
   include ::profile::munin::node
 
   # Manager-specific
-  #include ::profile::managerbackups
+  include ::profile::managerbackups
   include ::profile::puppetdb
   include ::profile::tftpserver
 }
