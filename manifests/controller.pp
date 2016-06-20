@@ -9,10 +9,7 @@ class role::controller {
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
   include ::profile::norpf
-  include ::profile::monitoring::logstashforwarder
-  include ::profile::monitoring::icingaclient
   #include ::profile::corosync
-  include ::profile::munin::node
   
   # Openstack controller
   include ::profile::openstack::keystone
@@ -28,4 +25,9 @@ class role::controller {
   # Ceph
   include ::profile::ceph::monitor
   include ::profile::munin::plugin::ceph
+
+  # Monitoring
+  #include ::profile::monitoring::logstashforwarder
+  #include ::profile::monitoring::icingaclient
+  include ::profile::munin::node
 }
