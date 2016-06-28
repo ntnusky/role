@@ -10,6 +10,7 @@ class role::compute {
   # Openstack compute
   include ::profile::openstack::neutronagent
   include ::profile::openstack::novacompute
+  include ::profile::users::nova
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
