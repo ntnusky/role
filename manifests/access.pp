@@ -1,4 +1,4 @@
 class role::access {
   include ::profile::baseconfig
-  include ::profile::sssd
+  include ::profile::sssd::accessvm
 }
