@@ -21,7 +21,8 @@ class role::controller {
   include ::profile::openstack::heat
   #include ::profile::openstack::neutronnetworks
   include ::profile::munin::plugin::nova
-  
+  include ::profile::mysql::accessvm
+
   # Ceph
   include ::profile::ceph::monitor
   include ::profile::munin::plugin::ceph
