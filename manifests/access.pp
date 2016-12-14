@@ -1,4 +1,5 @@
 class role::access {
   include ::profile::baseconfig
-  include ::profile::sssd
+  include ::mysql::client
+  include ::profile::sssd::accessvm
 }
