@@ -12,6 +12,7 @@ class role::controller {
   #include ::profile::corosync
   
   # Openstack controller
+  include ::profile::openstack::clients
   include ::profile::openstack::keystone
   include ::profile::openstack::glance
   include ::profile::openstack::novacontroller
