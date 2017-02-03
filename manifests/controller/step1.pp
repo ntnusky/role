@@ -7,5 +7,4 @@ class role::controller::step1 {
   include ::profile::memcache
   include ::profile::keepalived
   include ::profile::rabbitmq
-  include ::profile::norpf
 }

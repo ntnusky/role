@@ -8,5 +8,4 @@ class role::controller::step2 {
   include ::profile::keepalived
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
-  include ::profile::norpf
 }

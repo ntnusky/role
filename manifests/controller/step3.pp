@@ -8,7 +8,6 @@ class role::controller::step3 {
   include ::profile::keepalived
   include ::profile::mysqlcluster
   include ::profile::rabbitmq
-  include ::profile::norpf
 
   # Ceph
   include ::profile::ceph::monitor
