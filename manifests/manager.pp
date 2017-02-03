@@ -10,6 +10,6 @@ class role::manager {
 
   # Manager-specific
   include ::profile::managerbackups
-  include ::profile::puppetdb
+  include ::profile::services::puppetdb
   include ::profile::infrastructure::tftpserver
 }
