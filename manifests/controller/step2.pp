@@ -4,8 +4,7 @@ class role::controller::step2 {
   include ::profile::users
   
   # Include base services needed by openstack
-  include ::profile::memcache
-  include ::profile::keepalived
-  include ::profile::mysqlcluster
+  include ::profile::services::memcache
+  include ::profile::mysql::cluster
   include ::profile::rabbitmq
 }
