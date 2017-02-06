@@ -1,7 +1,7 @@
 class role::storage {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
-  include ::profile::users
+  include ::profile::baseconfig::users
 
   # Storage
   include ::profile::ceph::osd
