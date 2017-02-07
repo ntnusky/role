@@ -1,8 +1,7 @@
 class role::manager {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
-  include ::profile::users
-  include ::profile::norpf
+  include ::profile::baseconfig::users
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
@@ -11,6 +10,7 @@ class role::manager {
 
   # Manager-specific
   include ::profile::managerbackups
-  include ::profile::puppetdb
-  include ::profile::tftpserver
+  include ::profile::services::puppetdb
+  include ::profile::infrastructure::tftpserver
+  include ::profile::baseconfig::sudo::foreman
 }

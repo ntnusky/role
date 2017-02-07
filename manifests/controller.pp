@@ -1,15 +1,11 @@
 class role::controller {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
-  include ::profile::users
+  include ::profile::baseconfig::users
   
   # Include base services needed by openstack
-  include ::profile::memcache
-  include ::profile::keepalived
-  include ::profile::mysqlcluster
-  include ::profile::rabbitmq
-  include ::profile::norpf
-  #include ::profile::corosync
+  include ::profile::services::memcache
+  include ::profile::mysql::cluster
   
   # Openstack controller
   include ::profile::openstack::clients
