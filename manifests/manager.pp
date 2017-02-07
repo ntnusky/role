@@ -12,4 +12,5 @@ class role::manager {
   include ::profile::managerbackups
   include ::profile::services::puppetdb
   include ::profile::infrastructure::tftpserver
+  include ::profile::baseconfig::sudo::foreman
 }
