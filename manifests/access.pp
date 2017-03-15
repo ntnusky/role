@@ -3,4 +3,5 @@ class role::access {
   include ::mysql::client
   include ::profile::sssd::accessvm
   include ::profile::openstack::clients
+  include ::profile::sensu::client
 }
