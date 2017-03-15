@@ -8,6 +8,6 @@ class role::storage {
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
-  #include ::profile::monitoring::icingaclient
+  include ::profile::sensu::client
   include ::profile::munin::node
 }
