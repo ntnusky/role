@@ -2,11 +2,11 @@ class role::controller {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
-  
+
   # Include base services needed by openstack
   include ::profile::services::memcache
   include ::profile::mysql::cluster
-  
+
   # Openstack controller
   include ::profile::openstack::clients
   include ::profile::openstack::keystone
@@ -23,6 +23,7 @@ class role::controller {
   # Ceph
   include ::profile::ceph::monitor
   include ::profile::munin::plugin::ceph
+  include ::profile::sensu::plugin::ceph
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
