@@ -29,4 +29,5 @@ class role::controller {
   #include ::profile::monitoring::logstashforwarder
   include ::profile::sensu::client
   include ::profile::munin::node
+  include ::profile::sensu::plugin::mysql
 }
