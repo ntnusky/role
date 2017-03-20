@@ -30,4 +30,5 @@ class role::controller {
   include ::profile::sensu::client
   include ::profile::munin::node
   include ::profile::sensu::plugin::mysql
+  include ::profile::sensu::plugin::rabbitmq
 }
