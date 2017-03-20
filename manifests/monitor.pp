@@ -8,4 +8,5 @@ class role::monitor {
   include ::profile::munin::node
 
   include ::profile::sensu::server
+  include ::profile::sensu::plugin::http
 }
