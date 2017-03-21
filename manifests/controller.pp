@@ -17,7 +17,6 @@ class role::controller {
   include ::profile::openstack::cinder
   include ::profile::openstack::heat
   #include ::profile::openstack::neutronnetworks
-  include ::profile::munin::plugin::nova
   include ::profile::mysql::accessvm
 
   # Ceph
@@ -25,6 +24,4 @@ class role::controller {
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
-  include ::profile::sensu::plugin::mysql
-  include ::profile::sensu::plugin::rabbitmq
 }
