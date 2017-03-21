@@ -22,8 +22,6 @@ class role::controller {
 
   # Ceph
   include ::profile::ceph::monitor
-  include ::profile::munin::plugin::ceph
-  include ::profile::sensu::plugin::ceph
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
