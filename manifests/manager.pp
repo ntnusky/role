@@ -5,8 +5,6 @@ class role::manager {
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
-  include ::profile::sensu::client
-  include ::profile::munin::node
 
   # Manager-specific
   include ::profile::managerbackups

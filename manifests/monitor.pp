@@ -5,7 +5,6 @@ class role::monitor {
 
   # Monitoring
   include ::profile::munin::master
-  include ::profile::munin::node
 
   include ::profile::sensu::server
   include ::profile::sensu::plugin::http
