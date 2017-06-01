@@ -3,6 +3,7 @@ class role::monitor {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  include ::profile::openstack::maillist
   # Monitoring
   include ::profile::munin::master
 
