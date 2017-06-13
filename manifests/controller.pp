@@ -12,7 +12,7 @@ class role::controller {
   include ::profile::openstack::keystone
   include ::profile::openstack::glance
   include ::profile::openstack::novacontroller
-  include ::profile::openstack::neutronserver
+  include ::profile::openstack::neutron::controller
   include ::profile::openstack::horizon
   include ::profile::openstack::cinder
   include ::profile::openstack::heat

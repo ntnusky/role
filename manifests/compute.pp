@@ -7,7 +7,7 @@ class role::compute {
   include ::profile::ceph::client
 
   # Openstack compute
-  include ::profile::openstack::neutronagent
+  include ::profile::openstack::neutron::compute
   include ::profile::openstack::novacompute
 
   # Monitoring
