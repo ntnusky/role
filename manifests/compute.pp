@@ -8,7 +8,7 @@ class role::compute {
 
   # Openstack compute
   include ::profile::openstack::neutron::compute
-  include ::profile::openstack::novacompute
+  include ::profile::openstack::nova::compute
 
   # Monitoring
   #include ::profile::monitoring::logstashforwarder
