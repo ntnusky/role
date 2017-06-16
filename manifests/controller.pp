@@ -5,14 +5,17 @@ class role::controller {
 
   # Include base services needed by openstack
   include ::profile::services::memcache
+  include ::profile::services::rabbitmq
   include ::profile::mysql::cluster
 
   # Openstack controller
   include ::profile::openstack::clients
   include ::profile::openstack::keystone
   include ::profile::openstack::glance
-  include ::profile::openstack::novacontroller
-  include ::profile::openstack::neutronserver
+  include ::profile::openstack::nova::api
+  include ::profile::openstack::nova::services
+  include ::profile::openstack::neutron::api
+  include ::profile::openstack::neutron::network
   include ::profile::openstack::horizon
   include ::profile::openstack::cinder
   include ::profile::openstack::heat
