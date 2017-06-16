@@ -5,6 +5,7 @@ class role::controller {
 
   # Include base services needed by openstack
   include ::profile::services::memcache
+  include ::profile::services::rabbitmq
   include ::profile::mysql::cluster
 
   # Openstack controller
