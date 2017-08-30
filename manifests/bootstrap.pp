@@ -5,5 +5,6 @@ class role::bootstrap {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  include ::profile::services::dhcp
   include ::profile::services::tftp
 }
