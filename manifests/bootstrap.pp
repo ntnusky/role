@@ -6,6 +6,7 @@ class role::bootstrap {
   include ::profile::baseconfig::users
 
   include ::profile::services::apache
+  include ::profile::services::dashboard
   include ::profile::services::dhcp
   include ::profile::services::tftp
 }
