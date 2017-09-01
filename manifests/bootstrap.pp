@@ -8,5 +8,6 @@ class role::bootstrap {
   include ::profile::services::apache
   include ::profile::services::dashboard
   include ::profile::services::dhcp
+  include ::profile::services::puppetmaster
   include ::profile::services::tftp
 }
