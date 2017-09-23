@@ -6,6 +6,7 @@ class role::bootstrap {
   include ::profile::baseconfig::users
 
   include ::profile::mysql::cluster
+  include ::profile::services::dashboard::mysql
 
   include ::profile::services::apache
   include ::profile::services::dashboard
