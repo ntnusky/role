@@ -13,6 +13,11 @@ class role::bootstrap {
   include ::profile::services::dns
   include ::profile::services::dhcp
   include ::profile::services::postgresql
+  include ::profile::services::puppetdb::database
+  include ::profile::services::puppetdb::server
   include ::profile::services::puppetmaster
   include ::profile::services::tftp
+
+  Class['::profile::services::puppetdb::database'] ->
+  Class['::profile::services::puppetdb::server']
 }

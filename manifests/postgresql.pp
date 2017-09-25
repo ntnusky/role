@@ -5,4 +5,7 @@ class role::postgresql {
 
   # Include the postgresql profile 
   include ::profile::services::postgresql
+
+  # Create databases
+  include ::profile::services::puppetdb::database
 }
