@@ -12,6 +12,7 @@ class role::bootstrap {
   include ::profile::services::dashboard
   include ::profile::services::dns
   include ::profile::services::dhcp
+  include ::profile::services::postgresql
   include ::profile::services::puppetmaster
   include ::profile::services::tftp
 }
