@@ -10,7 +10,7 @@ class role::bootstrap {
 
   include ::profile::services::apache
   include ::profile::services::dashboard
-  include ::profile::services::dns
+  include ::profile::services::dns::master
   include ::profile::services::dhcp
   include ::profile::services::postgresql
   include ::profile::services::puppetdb::database
