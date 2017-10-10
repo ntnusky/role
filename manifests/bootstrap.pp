@@ -16,7 +16,7 @@ class role::bootstrap {
   include ::profile::services::puppetdb::database
   include ::profile::services::puppetdb::server
   include ::profile::services::puppetmaster
-  include ::profile::services::puppetmaster::haproxy
+  include ::profile::services::puppetmaster::loadbalancer
   include ::profile::services::tftp
 
   Class['::profile::services::puppetdb::database'] ->
