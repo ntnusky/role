@@ -5,7 +5,7 @@ class role::bootstrap {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::services::mysql::cluster
+  include ::profile::services::mysql
   include ::profile::services::mysql::haproxy::frontend 
   include ::profile::services::dashboard::mysql
 
