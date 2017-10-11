@@ -5,17 +5,17 @@ class role::bootstrap {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::services::mysql
-  include ::profile::services::mysql::haproxy::frontend 
-  include ::profile::services::dashboard::mysql
-
   include ::profile::services::apache
   include ::profile::services::dashboard
+  include ::profile::services::dashboard::mysql
   include ::profile::services::dns::master
   include ::profile::services::dhcp
   include ::profile::services::keepalived::haproxy::management
+  include ::profile::services::mysql
+  include ::profile::services::mysql::haproxy::frontend 
   include ::profile::services::postgresql
   include ::profile::services::puppetdb::database
+  include ::profile::services::puppetdb::haproxy::frontend 
   include ::profile::services::puppetdb::server
   include ::profile::services::puppetmaster
   include ::profile::services::puppetmaster::haproxy::frontend

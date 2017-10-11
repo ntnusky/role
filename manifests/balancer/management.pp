@@ -5,5 +5,6 @@ class role::balancer::management {
 
   include ::profile::services::mysql::haproxy::frontend
   include ::profile::services::keepalived::haproxy::management
+  include ::profile::services::puppetdb::haproxy::frontend 
   include ::profile::services::puppetmaster::haproxy::frontend
 }
