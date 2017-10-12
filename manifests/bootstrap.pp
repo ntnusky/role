@@ -23,6 +23,6 @@ class role::bootstrap {
 
   # TODO: This role probably needs more ordering to work properly.
   Class['::profile::services::puppet::db::database'] ->
-  Class['::profile::services::puppet::db::server'] ->
+  Class['::profile::services::puppet::db'] ->
   Class['::profile::services::puppet::server']
 }
