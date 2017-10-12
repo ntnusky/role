@@ -1,7 +1,7 @@
 # Installs and configures a puppetdb server.
-class role::puppetdb {
+class role::puppet::db {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::services::puppetdb::server
+  include ::profile::services::puppet::db
 }

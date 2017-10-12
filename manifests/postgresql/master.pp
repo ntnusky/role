@@ -7,5 +7,5 @@ class role::postgresql::master {
   include ::profile::services::postgresql
 
   # Create databases
-  include ::profile::services::puppetdb::database
+  include ::profile::services::puppet::db::database
 }

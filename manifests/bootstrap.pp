@@ -12,16 +12,17 @@ class role::bootstrap {
   include ::profile::services::dhcp
   include ::profile::services::keepalived::haproxy::management
   include ::profile::services::mysql
-  include ::profile::services::mysql::haproxy::frontend 
+  include ::profile::services::mysql::haproxy::frontend
   include ::profile::services::postgresql
-  include ::profile::services::puppetdb::database
-  include ::profile::services::puppetdb::haproxy::frontend 
-  include ::profile::services::puppetdb::server
-  include ::profile::services::puppetmaster
-  include ::profile::services::puppetmaster::haproxy::frontend
+  include ::profile::services::puppet::db
+  include ::profile::services::puppet::db::database
+  include ::profile::services::puppet::db::haproxy::frontend
+  include ::profile::services::puppet::server
+  include ::profile::services::puppet::server::haproxy::frontend
   include ::profile::services::tftp
 
-  Class['::profile::services::puppetdb::database'] ->
-  Class['::profile::services::puppetdb::server'] ->
-  Class['::profile::services::puppetmaster']
+  # TODO: This role probably needs more ordering to work properly.
+  Class['::profile::services::puppet::db::database'] ->
+  Class['::profile::services::puppet::db::server'] ->
+  Class['::profile::services::puppet::server']
 }
