@@ -11,5 +11,5 @@ class role::balancer::management {
   include ::profile::services::puppet::db::haproxy::frontend
   include ::profile::services::puppet::server::haproxy::frontend
   include ::profile::services::redis::haproxy
-  include ::profile::sensu::haproxy
+  include ::profile::sensu::uchiwa::haproxy
 }
