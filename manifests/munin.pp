@@ -4,5 +4,5 @@ class role::munin {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::services::munin::server
+  include ::profile::monitoring::munin::server
 }
