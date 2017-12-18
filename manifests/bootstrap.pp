@@ -8,7 +8,6 @@ class role::bootstrap {
   include ::profile::services::apache
   include ::profile::services::dashboard
   include ::profile::services::dashboard::mysql
-  include ::profile::services::dns::master
   include ::profile::services::dhcp
   include ::profile::services::keepalived::haproxy::management
   include ::profile::services::mysql
