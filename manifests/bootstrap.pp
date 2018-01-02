@@ -21,6 +21,7 @@ class role::bootstrap {
   include ::profile::services::tftp
 
   # TODO: This role probably needs more ordering to work properly.
+  Class['::profile::services::postgresql'] ->
   Class['::profile::services::puppet::db::database'] ->
   Class['::profile::services::puppet::db'] ->
   Class['::profile::services::puppet::server']
