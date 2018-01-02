@@ -27,7 +27,7 @@ class role::bootstrap {
   Class['::profile::services::puppet::server']
 
   Class['::profile::services::mysql'] ->
-  Class['::profile::services::mysql::mysql::haproxy::frontend'] ->
+  Class['::profile::services::mysql::haproxy::frontend'] ->
   Class['::profile::services::dashboard::mysql'] ->
   Class['::profile::services::dashboard']
 }
