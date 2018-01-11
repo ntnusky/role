@@ -7,6 +7,7 @@ class role::balancer::management {
   include ::profile::services::keepalived::haproxy::management
 
   # Configure the frontend for all the services which should be balanced
+  include ::profile::services::dashboard::haproxy::frontend
   include ::profile::services::mysql::haproxy::frontend
   include ::profile::services::puppet::db::haproxy::frontend
   include ::profile::services::puppet::server::haproxy::frontend
