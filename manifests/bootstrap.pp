@@ -5,6 +5,7 @@ class role::bootstrap {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  include ::profile::monitoring::munin::haproxy::backend
   include ::profile::sensu::uchiwa::haproxy
   include ::profile::services::apache
   include ::profile::services::dashboard
