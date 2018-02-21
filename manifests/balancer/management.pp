@@ -14,4 +14,7 @@ class role::balancer::management {
   include ::profile::services::redis::haproxy
   include ::profile::sensu::uchiwa::haproxy
   include ::profile::monitoring::munin::haproxy::backend
+
+  # Configure the frontend for the openstack management api's
+  include ::include ::profile::openstack::keystone::haproxy::management
 }
