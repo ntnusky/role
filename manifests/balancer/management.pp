@@ -17,4 +17,5 @@ class role::balancer::management {
 
   # Configure the frontend for the openstack management api's
   include ::profile::openstack::keystone::haproxy::management
+  include ::profile::openstack::glance::haproxy::management
 }
