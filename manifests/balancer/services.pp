@@ -7,7 +7,8 @@ class role::balancer::services {
   include ::profile::services::keepalived::haproxy::services
 
   # Configure the frontend for all the services which should be balacned
-  include ::profile::openstack::keystone::haproxy::services
+  include ::profile::openstack::cinder::haproxy::services
   include ::profile::openstack::glance::haproxy::services
+  include ::profile::openstack::keystone::haproxy::services
 }
 
