@@ -19,5 +19,6 @@ class role::balancer::management {
   include ::profile::openstack::cinder::haproxy::management
   include ::profile::openstack::glance::haproxy::management
   include ::profile::openstack::keystone::haproxy::management
+  include ::profile::openstack::neutron::haproxy::management
   include ::profile::openstack::nova::haproxy::management
 }
