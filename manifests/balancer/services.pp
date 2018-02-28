@@ -10,6 +10,7 @@ class role::balancer::services {
   include ::profile::openstack::cinder::haproxy::services
   include ::profile::openstack::glance::haproxy::services
   include ::profile::openstack::heat::haproxy::services
+  include ::profile::openstack::horizon::haproxy::frontend
   include ::profile::openstack::keystone::haproxy::services
   include ::profile::openstack::neutron::haproxy::services
   include ::profile::openstack::nova::haproxy::services
