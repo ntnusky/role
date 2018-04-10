@@ -5,4 +5,7 @@ class role::mysql {
 
   include ::profile::services::mysql
   include ::profile::services::dashboard::mysql
+
+  # Create various databases for us
+  require ::profile::openstack::keystone::database
 }
