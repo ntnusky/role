@@ -10,6 +10,7 @@ class role::controller {
 
   # Openstack controller
   include ::profile::openstack::clients
+  include ::profile::openstack::databases
   include ::profile::openstack::keystone
   include ::profile::openstack::glance
   include ::profile::openstack::nova::api
