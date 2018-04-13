@@ -14,5 +14,8 @@ class role::balancer::services {
   include ::profile::openstack::keystone::haproxy::services
   include ::profile::openstack::neutron::haproxy::services
   include ::profile::openstack::nova::haproxy::services
+
+  # We need the shiftleader backend to server the static info page
+  include ::profile::services::dashboard::haproxy::frontend
 }
 
