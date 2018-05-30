@@ -10,4 +10,7 @@ class role::controller::step3 {
 
   # Ceph
   include ::profile::ceph::monitor
+
+  # Openstack databases
+  include ::profile::openstack::databases
 }
