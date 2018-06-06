@@ -4,7 +4,7 @@ class role::apimon {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::openstack::clients
+  include ::ntnuopenstack::clients
 
   include ::profile::sensu::plugin::http
 }

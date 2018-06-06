@@ -7,13 +7,13 @@ class role::balancer::services {
   include ::profile::services::keepalived::haproxy::services
 
   # Configure the frontend for all the services which should be balacned
-  include ::profile::openstack::cinder::haproxy::services
-  include ::profile::openstack::glance::haproxy::services
-  include ::profile::openstack::heat::haproxy::services
-  include ::profile::openstack::horizon::haproxy::frontend
-  include ::profile::openstack::keystone::haproxy::services
-  include ::profile::openstack::neutron::haproxy::services
-  include ::profile::openstack::nova::haproxy::services
+  include ::ntnuopenstack::cinder::haproxy::services
+  include ::ntnuopenstack::glance::haproxy::services
+  include ::ntnuopenstack::heat::haproxy::services
+  include ::ntnuopenstack::horizon::haproxy::frontend
+  include ::ntnuopenstack::keystone::haproxy::services
+  include ::ntnuopenstack::neutron::haproxy::services
+  include ::ntnuopenstack::nova::haproxy::services
 
   # We need the shiftleader backend to server the static info page
   include ::profile::services::dashboard::haproxy::frontend

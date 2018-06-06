@@ -1,3 +1,4 @@
+# Installs an openstack compute node
 class role::compute {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
@@ -7,9 +8,6 @@ class role::compute {
   include ::profile::ceph::client
 
   # Openstack compute
-  include ::profile::openstack::neutron::compute
-  include ::profile::openstack::nova::compute
-
-  # Monitoring
-  #include ::profile::monitoring::logstashforwarder
+  include ::ntnuopenstack::neutron::compute
+  include ::ntnuopenstack::nova::compute
 }

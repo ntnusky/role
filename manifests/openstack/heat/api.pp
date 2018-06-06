@@ -5,5 +5,5 @@ class role::openstack::heat::api {
   include ::profile::baseconfig::users
 
   # Install the heat API
-  include ::profile::openstack::heat::api
+  include ::ntnuopenstack::heat::api
 }

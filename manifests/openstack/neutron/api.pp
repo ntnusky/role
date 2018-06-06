@@ -5,5 +5,5 @@ class role::openstack::neutron::api {
   include ::profile::baseconfig::users
 
   # Install the glance service
-  include ::profile::openstack::neutron::api
+  include ::ntnuopenstack::neutron::api
 }
