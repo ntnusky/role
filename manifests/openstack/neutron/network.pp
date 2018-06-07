@@ -5,5 +5,5 @@ class role::openstack::neutron::network {
   include ::profile::baseconfig::users
 
   # Install the neutron network node
-  include ::profile::openstack::neutron::network
+  include ::ntnuopenstack::neutron::network
 }

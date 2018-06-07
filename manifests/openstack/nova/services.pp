@@ -5,5 +5,5 @@ class role::openstack::nova::services {
   include ::profile::baseconfig::users
 
   # Openstack controller
-  include ::profile::openstack::nova::services
+  include ::ntnuopenstack::nova::services
 }

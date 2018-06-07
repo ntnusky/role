@@ -4,5 +4,5 @@ class role::openstack::keystone {
   include ::profile::baseconfig::users
 
   # Install the keystone service
-  include ::profile::openstack::keystone
+  include ::ntnuopenstack::keystone
 }

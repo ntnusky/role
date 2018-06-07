@@ -4,5 +4,5 @@ class role::openstack::horizon {
   include ::profile::baseconfig::users
 
   # Install the openstack dashboard
-  include ::profile::openstack::horizon
+  include ::ntnuopenstack::horizon
 }

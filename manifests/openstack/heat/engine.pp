@@ -5,5 +5,5 @@ class role::openstack::heat::engine {
   include ::profile::baseconfig::users
 
   # Install the heat engine
-  include ::profile::openstack::heat::engine
+  include ::ntnuopenstack::heat::engine
 }

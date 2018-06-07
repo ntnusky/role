@@ -6,5 +6,5 @@ class role::openstack::cinder {
   include ::profile::baseconfig::users
 
   # Install the cinder service
-  include ::profile::openstack::cinder
+  include ::ntnuopenstack::cinder
 }

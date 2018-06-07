@@ -4,5 +4,5 @@ class role::openstack::glance {
   include ::profile::baseconfig::users
 
   # Install the glance service
-  include ::profile::openstack::glance
+  include ::ntnuopenstack::glance
 }

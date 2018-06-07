@@ -16,10 +16,10 @@ class role::balancer::management {
   include ::profile::monitoring::munin::haproxy::backend
 
   # Configure the frontend for the openstack management api's
-  include ::profile::openstack::cinder::haproxy::management
-  include ::profile::openstack::glance::haproxy::management
-  include ::profile::openstack::heat::haproxy::management
-  include ::profile::openstack::keystone::haproxy::management
-  include ::profile::openstack::neutron::haproxy::management
-  include ::profile::openstack::nova::haproxy::management
+  include ::ntnuopenstack::cinder::haproxy::management
+  include ::ntnuopenstack::glance::haproxy::management
+  include ::ntnuopenstack::heat::haproxy::management
+  include ::ntnuopenstack::keystone::haproxy::management
+  include ::ntnuopenstack::neutron::haproxy::management
+  include ::ntnuopenstack::nova::haproxy::management
 }

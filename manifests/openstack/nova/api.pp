@@ -5,5 +5,5 @@ class role::openstack::nova::api {
   include ::profile::baseconfig::users
 
   # Openstack controller
-  include ::profile::openstack::nova::api
+  include ::ntnuopenstack::nova::api
 }
