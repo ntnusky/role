@@ -4,4 +4,5 @@ class role::dashboard::dev {
   include ::profile::baseconfig::users
 
   include ::profile::services::dashboard
+  include ::profile::services::dashboard::dev::firewall
 }
