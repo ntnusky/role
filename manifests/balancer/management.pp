@@ -22,4 +22,5 @@ class role::balancer::management {
   include ::ntnuopenstack::keystone::haproxy::management
   include ::ntnuopenstack::neutron::haproxy::management
   include ::ntnuopenstack::nova::haproxy::management
+  include ::ntnuopenstack::swift::haproxy::management
 }
