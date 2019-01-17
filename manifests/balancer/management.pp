@@ -22,5 +22,12 @@ class role::balancer::management {
   include ::ntnuopenstack::keystone::haproxy::management
   include ::ntnuopenstack::neutron::haproxy::management
   include ::ntnuopenstack::nova::haproxy::management
-  include ::ntnuopenstack::swift::haproxy::management
+
+  # If there is a password defined for switft, the service should be available.
+  $swift = lookup('ntnuopenstack::swift::keystone::password', {
+     'default_value' => false,
+  })
+  if($swift) {
+    include ::ntnuopenstack::swift::haproxy::management
+  }
 }
