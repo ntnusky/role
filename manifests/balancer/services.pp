@@ -15,6 +15,14 @@ class role::balancer::services {
   include ::ntnuopenstack::neutron::haproxy::services
   include ::ntnuopenstack::nova::haproxy::services
 
+  # If there is a password defined for switft, the service should be available.
+  $swift = lookup('ntnuopenstack::swift::keystone::password', {
+     'default_value' => false,
+  })
+  if($swift) {
+    include ::ntnuopenstack::swift::haproxy::services
+  }
+
   # We need the shiftleader backend to server the static info page
   include ::profile::services::dashboard::haproxy::frontend
 }
