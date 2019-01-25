@@ -5,6 +5,7 @@ class role::bootstrap {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  include ::profile::bird
   include ::profile::monitoring::munin::haproxy::backend
   include ::profile::sensu::uchiwa::haproxy
   include ::profile::services::apache
@@ -26,6 +27,7 @@ class role::bootstrap {
 
 
   # TODO: This role probably needs more ordering to work properly.
+  Class['::profile::services::keepalived::haproxy::management'] ->
   Class['::profile::services::postgresql'] ->
   Class['::profile::services::puppet::db::database'] ->
   Class['::profile::services::puppet::db'] ->
