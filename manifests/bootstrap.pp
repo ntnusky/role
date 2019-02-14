@@ -27,7 +27,6 @@ class role::bootstrap {
 
 
   # TODO: This role probably needs more ordering to work properly.
-  Class['::profile::services::keepalived::haproxy::management'] ->
   Class['::profile::services::postgresql'] ->
   Class['::profile::services::puppet::db::database'] ->
   Class['::profile::services::puppet::db'] ->
