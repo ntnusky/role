@@ -5,6 +5,8 @@ class role::balancer::services {
 
   # Configure keepalived to negotiate for the virtual IP
   include ::profile::services::keepalived::haproxy::services
+  # Add bird, if the preffered strategy to share a service-ip is anycast.
+  include ::profile::bird
 
   # Configure the frontend for all the services which should be balacned
   include ::ntnuopenstack::cinder::haproxy::services
