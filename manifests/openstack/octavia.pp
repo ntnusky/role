@@ -3,6 +3,6 @@ class role::openstack::octavia {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Install the openstack dashboard
+  # Install the openstack octavia controller
   include ::ntnuopenstack::octavia
 }
