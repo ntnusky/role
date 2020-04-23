@@ -40,4 +40,12 @@ class role::balancer::management {
   if($swift) {
     include ::ntnuopenstack::swift::haproxy::management
   }
+
+  # If there is a password defined for barbican, the service should be available.
+  $barbican = lookup('ntnuopenstack::barbican::keystone::password', {
+    'default_value' => false,
+  })
+  if($barbican) {
+    include ::ntnuopenstack::barbican::haproxy::management
+  }
 }

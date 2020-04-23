@@ -33,6 +33,14 @@ class role::balancer::services {
     include ::ntnuopenstack::swift::haproxy::services
   }
 
+  # If there is a password defined for barbican, the service should be available.
+  $barbican = lookup('ntnuopenstack::barbican::keystone::password', {
+    'default_value' => false,
+  })
+  if($barbican) {
+    include ::ntnuopenstack::barbican::haproxy::services
+  }
+
   # We need the shiftleader backend to server the static info page
   include ::profile::services::dashboard::haproxy::frontend
 }
