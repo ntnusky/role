@@ -48,4 +48,12 @@ class role::balancer::management {
   if($barbican) {
     include ::ntnuopenstack::barbican::haproxy::management
   }
+
+  # If there is a password defined for magnum, the service should be available.
+  $magnum = lookup('ntnuopenstack::magnum::keystone::password', {
+    'default_value' => false,
+  })
+  if($magnum) {
+    include ::ntnuopenstack::magnum::haproxy::management
+  }
 }
