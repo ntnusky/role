@@ -19,7 +19,7 @@ class role::balancer::services {
 
   # If there is a password defined for octavia, the service should be available.
   $octavia = lookup('ntnuopenstack::octavia::keystone::password', {
-     'default_value' => false,
+    'default_value' => false,
   })
   if($octavia) {
     include ::ntnuopenstack::octavia::haproxy::services
@@ -27,7 +27,7 @@ class role::balancer::services {
 
   # If there is a password defined for switft, the service should be available.
   $swift = lookup('ntnuopenstack::swift::keystone::password', {
-     'default_value' => false,
+    'default_value' => false,
   })
   if($swift) {
     include ::ntnuopenstack::swift::haproxy::services
@@ -39,6 +39,14 @@ class role::balancer::services {
   })
   if($barbican) {
     include ::ntnuopenstack::barbican::haproxy::services
+  }
+
+  # If there is a password defined for magnum, the service should be available.
+  $magnum = lookup('ntnuopenstack::magnum::keystone::password', {
+    'default_value' => false,
+  })
+  if($magnum) {
+    include ::ntnuopenstack::magnum::haproxy::services
   }
 
   # We need the shiftleader backend to server the static info page
