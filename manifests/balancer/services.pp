@@ -16,6 +16,7 @@ class role::balancer::services {
   include ::ntnuopenstack::keystone::haproxy::services
   include ::ntnuopenstack::neutron::haproxy::services
   include ::ntnuopenstack::nova::haproxy::services
+  include ::ntnuopenstack::placement::haproxy::services
 
   # If there is a password defined for octavia, the service should be available.
   $octavia = lookup('ntnuopenstack::octavia::keystone::password', {
