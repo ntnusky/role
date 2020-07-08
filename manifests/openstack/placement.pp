@@ -4,5 +4,5 @@ class role::openstack::placement {
   include ::profile::baseconfig::users
 
   # Install the placement service
-  include ::ntnuopenstack::placement
+  include ::ntnuopenstack::placement::api
 }
