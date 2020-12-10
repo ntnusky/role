@@ -4,7 +4,6 @@ class role::mysql::standalone {
   include ::profile::baseconfig::users
 
   include ::profile::services::mysql::standalone
-  include ::profile::services::dashboard::mysql
 
   # Create various databases for us
   include ::ntnuopenstack::databases
