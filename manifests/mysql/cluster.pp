@@ -4,7 +4,6 @@ class role::mysql::cluster {
   include ::profile::baseconfig::users
 
   include ::profile::services::mysql::cluster
-  include ::profile::services::dashboard::mysql
 
   # Create various databases for us
   include ::ntnuopenstack::databases
