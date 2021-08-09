@@ -6,5 +6,7 @@ class role::mysql::cluster {
   include ::profile::services::mysql::cluster
 
   # Create various databases for us
-  include ::ntnuopenstack::databases
+  class { '::ntnuopenstack::databases':
+    require => Class['::profile::services::mysql::cluster'],
+  }
 }
