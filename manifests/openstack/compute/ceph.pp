@@ -6,5 +6,7 @@ class role::openstack::compute::ceph {
 
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
-  include ::ntnuopenstack::nova::compute
+  class { '::ntnuopenstack::nova::compute':
+    localdisk => false,
+  }
 }

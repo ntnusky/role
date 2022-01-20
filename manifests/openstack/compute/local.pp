@@ -1,5 +1,5 @@
-# Installs an openstack compute node with vGPU support
-class role::openstack::compute::ceph::vgpu {
+# Installs an openstack compute node
+class role::openstack::compute::ceph {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
@@ -7,7 +7,6 @@ class role::openstack::compute::ceph::vgpu {
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
   class { '::ntnuopenstack::nova::compute':
-    localdisk => false,
+    localdisk => true,
   }
-  include ::ntnuopenstack::nova::compute::vgpu
 }
