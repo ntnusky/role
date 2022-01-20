@@ -4,11 +4,8 @@ class role::openstack::compute::ceph::vgpu {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Storage
-  include ::profile::ceph::client
-
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
   include ::ntnuopenstack::nova::compute
-  include ::ntnuopenstack::nova::vgpu
+  include ::ntnuopenstack::nova::compute::vgpu
 }

@@ -4,9 +4,6 @@ class role::openstack::compute::ceph {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Storage
-  include ::profile::ceph::client
-
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
   include ::ntnuopenstack::nova::compute
