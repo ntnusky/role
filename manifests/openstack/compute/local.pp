@@ -1,5 +1,5 @@
 # Installs an openstack compute node
-class role::openstack::compute::ceph {
+class role::openstack::compute::local {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
