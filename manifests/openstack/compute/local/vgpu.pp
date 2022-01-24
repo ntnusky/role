@@ -1,6 +1,7 @@
-# Installs an openstack compute node with vGPU support
-# This compute-node places flavor-related storage on ceph 
-class role::openstack::compute::ceph::vgpu {
+# Installs an openstack compute node with vGPU support.
+# This compute-node places flavor-related storage on the compute-nodes local
+# disks.
+class role::openstack::compute::local::vgpu {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
@@ -8,7 +9,7 @@ class role::openstack::compute::ceph::vgpu {
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
   class { '::ntnuopenstack::nova::compute':
-    localdisk => false,
+    localdisk => true,
   }
   include ::ntnuopenstack::nova::compute::vgpu
 }

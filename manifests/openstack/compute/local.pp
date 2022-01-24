@@ -1,13 +1,14 @@
 # Installs an openstack compute node
-class role::compute {
+# This compute-node places flavor-related storage on the compute-nodes local
+# disks.
+class role::openstack::compute::local {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Storage
-  include ::profile::ceph::client
-
   # Openstack compute
   include ::ntnuopenstack::neutron::compute
-  include ::ntnuopenstack::nova::compute
+  class { '::ntnuopenstack::nova::compute':
+    localdisk => true,
+  }
 }
