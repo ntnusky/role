@@ -52,5 +52,6 @@ class role::balancer::services {
 
   # We need the shiftleader backend to server the static info page
   include ::profile::services::dashboard::haproxy::frontend
+  include ::profile::services::shiftleader::haproxy::frontend
 }
 
