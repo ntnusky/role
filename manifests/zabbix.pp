@@ -12,4 +12,6 @@ class role::zabbix {
   # Zabbix needs a database:
   include ::profile::zabbix::database
 
+  include ::profile::zabbix::server
+
 }
