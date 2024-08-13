@@ -9,4 +9,7 @@ class role::zabbix {
   # Zabbix need a database-cluster
   include ::profile::services::mysql::cluster
 
+  # Zabbix needs a database:
+  include ::profile::zabbix::database
+
 }
