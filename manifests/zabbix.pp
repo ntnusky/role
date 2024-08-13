@@ -1,5 +1,5 @@
 # This role installs a mysql server joining a galera cluster
-class role::mysql::cluster {
+class role::zabbix {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
