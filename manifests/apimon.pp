@@ -5,6 +5,7 @@ class role::apimon {
   include ::profile::baseconfig::users
 
   include ::ntnuopenstack::clients
+  include ::ntnuopenstack::zabbix
 
   include ::profile::sensu::plugin::http
 }
