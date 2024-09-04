@@ -1,4 +1,4 @@
-# Installs a server that only runs sensu checks of APIs and web services
+# Installs a server that only runs monitoring checks of APIs and web services
 class role::apimon {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
@@ -6,6 +6,7 @@ class role::apimon {
 
   include ::ntnuopenstack::clients
   include ::ntnuopenstack::zabbix
+  include ::profile::zabbix::agent::tls
 
   include ::profile::sensu::plugin::http
 }
