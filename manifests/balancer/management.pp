@@ -3,13 +3,9 @@ class role::balancer::management {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Configure keepalived to negotiate for the virtual IP
-  include ::profile::services::keepalived::haproxy::management
-  # Add bird, if the preffered strategy to share a service-ip is anycast.
   include ::profile::bird
 
   # Configure the frontend for all the services which should be balanced
-  include ::profile::services::dashboard::haproxy::frontend
   include ::profile::services::mysql::haproxy::frontend
   include ::profile::services::puppet::db::haproxy::frontend
   include ::profile::services::puppet::server::haproxy::frontend
