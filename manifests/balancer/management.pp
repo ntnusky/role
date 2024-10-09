@@ -14,44 +14,16 @@ class role::balancer::management {
   include ::profile::sensu::uchiwa::haproxy
   include ::profile::monitoring::munin::haproxy::backend
 
-  # Configure the frontend for the openstack management api's
-  include ::ntnuopenstack::cinder::haproxy::management
-  include ::ntnuopenstack::glance::haproxy::management
-  include ::ntnuopenstack::heat::haproxy::management
-  include ::ntnuopenstack::keystone::haproxy::management
-  include ::ntnuopenstack::neutron::haproxy::management
-  include ::ntnuopenstack::nova::haproxy::management
-  include ::ntnuopenstack::placement::haproxy::management
+  $services = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
+    'nova', 'octavia', 'placement', 'switft']
+  $services.each | $service | {
+    $password = lookup("ntnuopenstack::${service}::keystone::password", {
+      'defualt_value' => undef
+      'value_type'    => Optional[String],
+    })
 
-  # If there is a password defined for octavia, the service should be available.
-  $octavia = lookup('ntnuopenstack::octavia::keystone::password', {
-    'default_value' => false,
-  })
-  if($octavia) {
-    include ::ntnuopenstack::octavia::haproxy::management
-  }
-
-  # If there is a password defined for switft, the service should be available.
-  $swift = lookup('ntnuopenstack::swift::keystone::password', {
-    'default_value' => false,
-  })
-  if($swift) {
-    include ::ntnuopenstack::swift::haproxy::management
-  }
-
-  # If there is a password defined for barbican, the service should be available.
-  $barbican = lookup('ntnuopenstack::barbican::keystone::password', {
-    'default_value' => false,
-  })
-  if($barbican) {
-    include ::ntnuopenstack::barbican::haproxy::management
-  }
-
-  # If there is a password defined for magnum, the service should be available.
-  $magnum = lookup('ntnuopenstack::magnum::keystone::password', {
-    'default_value' => false,
-  })
-  if($magnum) {
-    include ::ntnuopenstack::magnum::haproxy::management
+    if($password) {
+      include "::ntnuopenstack::${service}::haproxy::management"
+    }
   }
 }
