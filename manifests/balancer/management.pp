@@ -7,7 +7,7 @@ class role::balancer::management {
     include ::profile::bird
 
     $mysql = lookup('profile::mysqlcluster::root_password', {
-      'defualt_value' => undef,
+      'default_value' => undef,
       'value_type'    => Optional[String],
     })
     if($mysql) {
@@ -15,7 +15,7 @@ class role::balancer::management {
     }
 
     $puppet = lookup('profile::puppetdb::database::pass', {
-      'defualt_value' => undef,
+      'default_value' => undef,
       'value_type'    => Optional[String],
     })
     if($puppet) {
@@ -24,7 +24,7 @@ class role::balancer::management {
     }
   
     $shiftleader = lookup('shiftleader::params::web_name', {
-      'defualt_value' => undef,
+      'default_value' => undef,
       'value_type'    => Optional[String],
     })
     if($shiftleader) {
@@ -35,7 +35,7 @@ class role::balancer::management {
       'nova', 'octavia', 'placement', 'switft']
     $services.each | $service | {
       $password = lookup("ntnuopenstack::${service}::keystone::password", {
-        'defualt_value' => undef,
+        'default_value' => undef,
         'value_type'    => Optional[String],
       })
   
