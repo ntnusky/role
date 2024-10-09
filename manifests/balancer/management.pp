@@ -3,27 +3,49 @@ class role::balancer::management {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::profile::bird
+  if($::facts['openstack'] and $::facts['openstack']['region']) {
+    include ::profile::bird
 
-  # Configure the frontend for all the services which should be balanced
-  include ::profile::services::mysql::haproxy::frontend
-  include ::profile::services::puppet::db::haproxy::frontend
-  include ::profile::services::puppet::server::haproxy::frontend
-  include ::profile::services::redis::haproxy
-  include ::profile::services::shiftleader::haproxy::frontend
-  include ::profile::sensu::uchiwa::haproxy
-  include ::profile::monitoring::munin::haproxy::backend
-
-  $services = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
-    'nova', 'octavia', 'placement', 'switft']
-  $services.each | $service | {
-    $password = lookup("ntnuopenstack::${service}::keystone::password", {
-      'defualt_value' => undef
+    $mysql = lookup('profile::mysqlcluster::root_password', {
+      'defualt_value' => undef,
       'value_type'    => Optional[String],
     })
+    if($mysql) {
+      include ::profile::services::mysql::haproxy::frontend
+    }
 
-    if($password) {
-      include "::ntnuopenstack::${service}::haproxy::management"
+    $puppet = lookup('profile::puppetdb::database::pass', {
+      'defualt_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($puppet) {
+      include ::profile::services::puppet::db::haproxy::frontend
+      include ::profile::services::puppet::server::haproxy::frontend
+    }
+  
+    $shiftleader = lookup('shiftleader::params::web_name', {
+      'defualt_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($shiftleader) {
+      include ::profile::services::shiftleader::haproxy::frontend
+    }
+  
+    $services = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
+      'nova', 'octavia', 'placement', 'switft']
+    $services.each | $service | {
+      $password = lookup("ntnuopenstack::${service}::keystone::password", {
+        'defualt_value' => undef,
+        'value_type'    => Optional[String],
+      })
+  
+      if($password) {
+        include "::ntnuopenstack::${service}::haproxy::management"
+      }
+    }
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
     }
   }
 }
