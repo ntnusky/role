@@ -3,8 +3,14 @@ class role::balancer::management {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  if($::facts['openstack'] and $::facts['openstack']['region']) {
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
+
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
     include ::profile::bird
+    include ::profile::services::haproxy
 
     $mysql = lookup('profile::mysqlcluster::root_password', {
       'default_value' => undef,
@@ -29,6 +35,14 @@ class role::balancer::management {
     })
     if($shiftleader) {
       include ::profile::services::shiftleader::haproxy::frontend
+    }
+
+    $keystone = lookup('ntnuopenstack::keystone::admin_password', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($keystone) {
+      include ::ntnuopenstack::keystone::haproxy::management
     }
   
     $services = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
