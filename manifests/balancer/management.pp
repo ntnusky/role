@@ -12,11 +12,15 @@ class role::balancer::management {
     include ::profile::bird
     include ::profile::services::haproxy
 
-    $mysql = lookup('profile::mysqlcluster::root_password', {
+    $mysql = lookup('profile::mysql::root_password', {
       'default_value' => undef,
       'value_type'    => Optional[String],
     })
-    if($mysql) {
+    $mysqlc = lookup('profile::mysqlcluster::root_password', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($mysql or $mysqlc) {
       include ::profile::services::mysql::haproxy::frontend
     }
 
