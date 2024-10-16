@@ -25,7 +25,7 @@ class role::balancer::services {
       }
     }
 
-    $horizon = lookup('ntnuopenstack::horizon::server_name', {
+    $horizon = lookup('ntnuopenstack::horizon::django_secret', {
       'default_value' => undef,
       'value_type'    => Optional[String],
     })
