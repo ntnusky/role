@@ -7,6 +7,11 @@ class role::balancer::management {
     'default_value' => false,
     'value_type'    => Boolean,
   })
+  $services = lookup('ntnuopenstack::services', {
+    'value_type' => Hash[String, Hash],
+  })
+  $region = lookup('ntnuopenstack::region')
+  $keystone_region = lookup('ntnuopenstack::keystone::region')
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
     include ::profile::bird
@@ -41,23 +46,14 @@ class role::balancer::management {
       include ::profile::services::shiftleader::haproxy::frontend
     }
 
-    $keystone = lookup('ntnuopenstack::keystone::admin_password', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
-    })
-    if($keystone) {
+    if($keystone_region == $region) {
       include ::ntnuopenstack::keystone::haproxy::management
     }
   
-    $services = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
+    $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
       'nova', 'octavia', 'placement', 'switft']
-    $services.each | $service | {
-      $password = lookup("ntnuopenstack::${service}::keystone::password", {
-        'default_value' => undef,
-        'value_type'    => Optional[String],
-      })
-  
-      if($password) {
+    $servicenames.each | $service | {
+      if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::management"
       }
     }
