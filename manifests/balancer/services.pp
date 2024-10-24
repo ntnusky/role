@@ -10,6 +10,7 @@ class role::balancer::services {
 
   # Configure the frontend for all the services which should be balacned
   include ::ntnuopenstack::cinder::haproxy::services
+  include ::ntnuopenstack::designate::haproxy::services
   include ::ntnuopenstack::glance::haproxy::services
   include ::ntnuopenstack::heat::haproxy::services
   include ::ntnuopenstack::horizon::haproxy::frontend
