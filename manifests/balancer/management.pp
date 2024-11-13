@@ -51,7 +51,7 @@ class role::balancer::management {
     }
   
     $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
-      'nova', 'octavia', 'placement', 'switft']
+      'nova', 'octavia', 'placement']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::management"
