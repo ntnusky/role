@@ -3,6 +3,17 @@ class role::openstack::octavia {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Install the openstack octavia controller
-  include ::ntnuopenstack::octavia
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
+
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # Install the openstack octavia controller
+    include ::ntnuopenstack::octavia
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }

@@ -4,6 +4,16 @@ class role::openstack::nova::services {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Openstack controller
-  include ::ntnuopenstack::nova::services
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
+
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    include ::ntnuopenstack::nova::services
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }

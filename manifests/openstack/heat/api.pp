@@ -4,6 +4,17 @@ class role::openstack::heat::api {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Install the heat API
-  include ::ntnuopenstack::heat::api
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
+
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # Install the heat API
+    include ::ntnuopenstack::heat::api
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }

@@ -10,10 +10,11 @@ class role::balancer::services {
   $services = lookup('ntnuopenstack::services', {
     'value_type' => Hash[String, Hash],
   })
-  $region = lookup('ntnuopenstack::region')
-  $keystone_region = lookup('ntnuopenstack::keystone::region')
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    $region = lookup('ntnuopenstack::region')
+    $keystone_region = lookup('ntnuopenstack::keystone::region')
+
     include ::profile::bird
     include ::profile::services::haproxy
 

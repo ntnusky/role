@@ -10,13 +10,9 @@ class role::balancer::management {
   $services = lookup('ntnuopenstack::services', {
     'value_type' => Hash[String, Hash],
   })
-  $region = lookup('ntnuopenstack::region')
-  $keystone_region = lookup('ntnuopenstack::keystone::region')
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
-    include ::profile::bird
-    include ::profile::services::haproxy
-
+    $keystone_region = lookup('ntnuopenstack::keystone::region')
     $mysql = lookup('profile::mysql::root_password', {
       'default_value' => undef,
       'value_type'    => Optional[String],
@@ -25,6 +21,11 @@ class role::balancer::management {
       'default_value' => undef,
       'value_type'    => Optional[String],
     })
+    $region = lookup('ntnuopenstack::region')
+
+    include ::profile::bird
+    include ::profile::services::haproxy
+
     if($mysql or $mysqlc) {
       include ::profile::services::mysql::haproxy::frontend
     }
