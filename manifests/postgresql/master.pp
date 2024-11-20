@@ -3,9 +3,20 @@ class role::postgresql::master {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Include the postgresql profile 
-  include ::profile::services::postgresql
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
 
-  # Create databases
-  include ::profile::services::puppet::db::database
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # Include the postgresql profile 
+    include ::profile::services::postgresql
+
+    # Create databases
+    include ::profile::services::puppet::db::database
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }
