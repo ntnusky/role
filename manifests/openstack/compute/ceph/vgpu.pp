@@ -5,10 +5,21 @@ class role::openstack::compute::ceph::vgpu {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Openstack compute
-  include ::ntnuopenstack::neutron::compute
-  class { '::ntnuopenstack::nova::compute':
-    localdisk => false,
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
+
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # Openstack compute
+    include ::ntnuopenstack::neutron::compute
+    class { '::ntnuopenstack::nova::compute':
+      localdisk => false,
+    }
+    include ::ntnuopenstack::nova::compute::vgpu
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
   }
-  include ::ntnuopenstack::nova::compute::vgpu
 }

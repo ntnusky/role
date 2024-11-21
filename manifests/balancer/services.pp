@@ -3,56 +3,52 @@ class role::balancer::services {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  # Configure keepalived to negotiate for the virtual IP
-  include ::profile::services::keepalived::haproxy::services
-  # Add bird, if the preffered strategy to share a service-ip is anycast.
-  include ::profile::bird
-
-  # Configure the frontend for all the services which should be balacned
-  include ::ntnuopenstack::cinder::haproxy::services
-  include ::ntnuopenstack::designate::haproxy::services
-  include ::ntnuopenstack::glance::haproxy::services
-  include ::ntnuopenstack::heat::haproxy::services
-  include ::ntnuopenstack::horizon::haproxy::frontend
-  include ::ntnuopenstack::keystone::haproxy::services
-  include ::ntnuopenstack::neutron::haproxy::services
-  include ::ntnuopenstack::nova::haproxy::services
-  include ::ntnuopenstack::placement::haproxy::services
-
-  # If there is a password defined for octavia, the service should be available.
-  $octavia = lookup('ntnuopenstack::octavia::keystone::password', {
+  $regionless = lookup('profile::region::missing::ok', {
     'default_value' => false,
+    'value_type'    => Boolean,
   })
-  if($octavia) {
-    include ::ntnuopenstack::octavia::haproxy::services
-  }
-
-  # If there is a password defined for switft, the service should be available.
-  $swift = lookup('ntnuopenstack::swift::keystone::password', {
-    'default_value' => false,
+  $services = lookup('ntnuopenstack::services', {
+    'value_type' => Hash[String, Hash],
   })
-  if($swift) {
-    include ::ntnuopenstack::swift::haproxy::services
-  }
 
-  # If there is a password defined for barbican, the service should be available.
-  $barbican = lookup('ntnuopenstack::barbican::keystone::password', {
-    'default_value' => false,
-  })
-  if($barbican) {
-    include ::ntnuopenstack::barbican::haproxy::services
-  }
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    $region = lookup('ntnuopenstack::region')
+    $keystone_region = lookup('ntnuopenstack::keystone::region')
 
-  # If there is a password defined for magnum, the service should be available.
-  $magnum = lookup('ntnuopenstack::magnum::keystone::password', {
-    'default_value' => false,
-  })
-  if($magnum) {
-    include ::ntnuopenstack::magnum::haproxy::services
-  }
+    include ::profile::bird
+    include ::profile::services::haproxy
 
-  # We need the shiftleader backend to server the static info page
-  include ::profile::services::dashboard::haproxy::frontend
-  include ::profile::services::shiftleader::haproxy::frontend
+    $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
+      'nova', 'octavia', 'placement', 'swift']
+    $servicenames.each | $service | {
+      if($region in $services and $service in $services[$region]['services']) {
+        include "::ntnuopenstack::${service}::haproxy::services"
+      }
+    }
+
+    $horizon = lookup('ntnuopenstack::horizon::django_secret', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($horizon) {
+      include ::ntnuopenstack::horizon::haproxy::frontend
+    }
+
+    if($keystone_region == $region) {
+      include ::ntnuopenstack::keystone::haproxy::services
+    }
+
+    $infopage = lookup('profile::info::maillist::fqdn', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
+    if($infopage) {
+      include ::profile::services::shiftleader::haproxy::frontend
+    }
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }
 

@@ -1,10 +1,21 @@
-# Installs a server that only runs sensu checks of APIs and web services
+# Installs a server that only runs monitoring checks of APIs and web services
 class role::apimon {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
-  include ::ntnuopenstack::clients
+  $regionless = lookup('profile::region::missing::ok', {
+    'default_value' => false,
+    'value_type'    => Boolean,
+  })
 
-  include ::profile::sensu::plugin::http
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    include ::ntnuopenstack::clients
+    include ::ntnuopenstack::zabbix
+    include ::profile::zabbix::agent::tls
+  } else {
+    notify { 'Base-Only':
+      message => 'Only role::base applied due to missing region fact',
+    }
+  }
 }

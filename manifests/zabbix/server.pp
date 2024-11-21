@@ -1,5 +1,6 @@
-# This role installs a mysql server joining a galera cluster
-class role::mysql::cluster {
+# This role installs a zabbix-server together with a galera-cluster. The role
+# can thus become HA if you have several of them. 
+class role::zabbix::server {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
@@ -9,11 +10,16 @@ class role::mysql::cluster {
   })
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
-    include ::profile::services::mysql::cluster
-    include ::profile::services::mysql::databases
+    # Add bird so that the zabbix-boxes can announce an anycast-IP
+    include ::profile::bird
 
-    # Create various databases for us
-    include ::ntnuopenstack::databases
+    # Zabbix need a database-cluster
+    include ::profile::services::mysql::cluster
+
+    # Zabbix needs a database:
+    include ::profile::zabbix::database
+
+    include ::profile::zabbix::server
   } else {
     notify { 'Base-Only':
       message => 'Only role::base applied due to missing region fact',

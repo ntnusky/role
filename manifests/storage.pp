@@ -1,11 +1,8 @@
 class role::storage {
-  # Baseconfiguration. Should be on all hosts.
-  include ::profile::baseconfig
-  include ::profile::baseconfig::users
+  notify { 'role::storage is DEPRECATED':
+    message => 
+      'role::storage is deprecated. role::ceph::storage should be used instead',
+  }
 
-  # Storage
-  include ::profile::ceph::osd
-
-  # Monitoring
-  #include ::profile::monitoring::logstashforwarder
+  include ::role::ceph::storage
 }

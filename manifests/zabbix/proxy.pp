@@ -1,5 +1,5 @@
-class role::ceph::mon {
-  # Baseconfiguration. Should be on all hosts.
+# This role installs a zabbix-proxy 
+class role::zabbix::proxy {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
@@ -9,8 +9,7 @@ class role::ceph::mon {
   })
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
-    # Ceph
-    include ::profile::ceph::monitor
+    include ::profile::zabbix::proxy
   } else {
     notify { 'Base-Only':
       message => 'Only role::base applied due to missing region fact',

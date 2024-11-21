@@ -1,4 +1,4 @@
-class role::ceph::mon {
+class role::ceph::storage {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
@@ -9,8 +9,8 @@ class role::ceph::mon {
   })
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
-    # Ceph
-    include ::profile::ceph::monitor
+    # Storage
+    include ::profile::ceph::osd
   } else {
     notify { 'Base-Only':
       message => 'Only role::base applied due to missing region fact',
