@@ -18,8 +18,8 @@ class role::balancer::services {
     include ::profile::bird
     include ::profile::services::haproxy
 
-    $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
-      'nova', 'octavia', 'placement', 'swift']
+    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 'magnum',
+      'neutron', 'nova', 'octavia', 'placement', 'swift']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::services"
