@@ -11,7 +11,7 @@ class role::balancer::services {
     'value_type' => Hash[String, Hash],
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     $region = lookup('ntnuopenstack::region')
     $keystone_region = lookup('ntnuopenstack::keystone::region')
 

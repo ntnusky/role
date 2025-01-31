@@ -8,7 +8,7 @@ class role::mysql::cluster {
     'value_type'    => Boolean,
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     include ::profile::services::mysql::cluster
     include ::profile::services::mysql::databases
 

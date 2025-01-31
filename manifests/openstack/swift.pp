@@ -10,7 +10,7 @@ class role::openstack::swift {
     'value_type'    => Boolean,
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     # Install the swift gateway 
     include ::ntnuopenstack::swift
   } else {

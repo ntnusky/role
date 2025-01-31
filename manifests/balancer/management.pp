@@ -11,7 +11,7 @@ class role::balancer::management {
     'value_type' => Hash[String, Hash],
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     $keystone_region = lookup('ntnuopenstack::keystone::region')
     $mysql = lookup('profile::mysql::root_password', {
       'default_value' => undef,
