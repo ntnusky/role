@@ -28,7 +28,7 @@ class role::balancer::services {
 
     $horizon = lookup('ntnuopenstack::horizon::enabled', {
       'default_value' => true,
-      'value_type'    => Optional[String],
+      'value_type'    => Boolean,
     })
     if($horizon) {
       include ::ntnuopenstack::horizon::haproxy::frontend
