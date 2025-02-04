@@ -26,8 +26,8 @@ class role::balancer::services {
       }
     }
 
-    $horizon = lookup('ntnuopenstack::horizon::django_secret', {
-      'default_value' => undef,
+    $horizon = lookup('ntnuopenstack::horizon::enabled', {
+      'default_value' => true,
       'value_type'    => Optional[String],
     })
     if($horizon) {
