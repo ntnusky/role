@@ -30,13 +30,20 @@ class role::balancer::management {
       include ::profile::services::mysql::haproxy::frontend
     }
 
-    $puppet = lookup('profile::puppetdb::database::pass', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
+    $puppet = lookup('profile::haproxy::puppet::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
     })
     if($puppet) {
-      include ::profile::services::puppet::db::haproxy::frontend
       include ::profile::services::puppet::server::haproxy::frontend
+    }
+
+    $puppetdb = lookup('profile::haproxy::puppetdb::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
+    })
+    if($puppetdb) {
+      include ::profile::services::puppet::db::haproxy::frontend
     }
   
     $shiftleader = lookup('shiftleader::params::web_name', {
