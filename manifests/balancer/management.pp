@@ -46,9 +46,9 @@ class role::balancer::management {
       include ::profile::services::puppet::db::haproxy::frontend
     }
   
-    $shiftleader = lookup('shiftleader::params::web_name', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
+    $shiftleader = lookup('profile::haproxy::shiftleader::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean, 
     })
     if($shiftleader) {
       include ::profile::services::shiftleader::haproxy::frontend
