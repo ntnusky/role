@@ -13,20 +13,16 @@ class role::balancer::management {
 
   if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     $keystone_region = lookup('ntnuopenstack::keystone::region')
-    $mysql = lookup('profile::mysql::root_password', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
-    })
-    $mysqlc = lookup('profile::mysqlcluster::root_password', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
-    })
     $region = lookup('ntnuopenstack::region')
 
     include ::profile::bird
     include ::profile::services::haproxy
 
-    if($mysql or $mysqlc) {
+    $mysql = lookup('profile::haproxy::mysql::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
+    })
+    if($mysql) {
       include ::profile::services::mysql::haproxy::frontend
     }
 
