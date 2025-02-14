@@ -9,6 +9,9 @@ class role::openstack::designate::ns {
   })
 
   if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # The nameserver might use anycast:
+    include ::profile::bird
+
     # Install the nameserver for designate
     include ::ntnuopenstack::designate::ns
   } else {
