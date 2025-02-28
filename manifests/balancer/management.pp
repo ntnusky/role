@@ -12,7 +12,10 @@ class role::balancer::management {
   })
 
   if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
-    $keystone_region = lookup('ntnuopenstack::keystone::region')
+    $keystone_region = lookup('ntnuopenstack::keystone::region', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
     $region = lookup('ntnuopenstack::region')
 
     include ::profile::bird
@@ -50,7 +53,7 @@ class role::balancer::management {
       include ::profile::services::shiftleader::haproxy::frontend
     }
 
-    if($keystone_region == $region) {
+    if($keystone_region == undef or $keystone_region == $region) {
       include ::ntnuopenstack::keystone::haproxy::management
     }
   
