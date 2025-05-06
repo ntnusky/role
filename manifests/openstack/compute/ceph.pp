@@ -10,7 +10,7 @@ class role::openstack::compute::ceph {
     'value_type'    => Boolean,
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     # Openstack compute
     include ::ntnuopenstack::neutron::compute
     class { '::ntnuopenstack::nova::compute':

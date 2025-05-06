@@ -8,7 +8,7 @@ class role::postgresql::slave {
     'value_type'    => Boolean,
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     # Include the postgresql profile 
     include ::profile::services::postgresql
   } else {

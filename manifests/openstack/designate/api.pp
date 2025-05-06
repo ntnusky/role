@@ -1,4 +1,4 @@
-class role::postgresql::master {
+class role::openstack::designate::api {
   # Baseconfiguration. Should be on all hosts.
   include ::profile::baseconfig
   include ::profile::baseconfig::users
@@ -8,12 +8,9 @@ class role::postgresql::master {
     'value_type'    => Boolean,
   })
 
-  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
-    # Include the postgresql profile 
-    include ::profile::services::postgresql
-
-    # Create databases
-    include ::profile::services::puppet::db::database
+  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+    # Install the openstack designate server
+    include ::ntnuopenstack::designate::api
   } else {
     notify { 'Base-Only':
       message => 'Only role::base applied due to missing region fact',

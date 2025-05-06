@@ -11,13 +11,8 @@ class role::balancer::management {
     'value_type' => Hash[String, Hash],
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
-    $keystone_region = lookup('ntnuopenstack::keystone::region')
-    $mysql = lookup('profile::mysql::root_password', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
-    })
-    $mysqlc = lookup('profile::mysqlcluster::root_password', {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
+    $keystone_region = lookup('ntnuopenstack::keystone::region', {
       'default_value' => undef,
       'value_type'    => Optional[String],
     })
@@ -26,33 +21,44 @@ class role::balancer::management {
     include ::profile::bird
     include ::profile::services::haproxy
 
-    if($mysql or $mysqlc) {
+    $mysql = lookup('profile::haproxy::mysql::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
+    })
+    if($mysql) {
       include ::profile::services::mysql::haproxy::frontend
     }
 
-    $puppet = lookup('profile::puppetdb::database::pass', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
+    $puppet = lookup('profile::haproxy::puppet::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
     })
     if($puppet) {
-      include ::profile::services::puppet::db::haproxy::frontend
       include ::profile::services::puppet::server::haproxy::frontend
     }
+
+    $puppetdb = lookup('profile::haproxy::puppetdb::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean,
+    })
+    if($puppetdb) {
+      include ::profile::services::puppet::db::haproxy::frontend
+    }
   
-    $shiftleader = lookup('shiftleader::params::web_name', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
+    $shiftleader = lookup('profile::haproxy::shiftleader::enable', {
+      'default_value' => true,
+      'value_type'    => Boolean, 
     })
     if($shiftleader) {
       include ::profile::services::shiftleader::haproxy::frontend
     }
 
-    if($keystone_region == $region) {
+    if($keystone_region == undef or $keystone_region == $region) {
       include ::ntnuopenstack::keystone::haproxy::management
     }
   
-    $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
-      'nova', 'octavia', 'placement']
+    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 
+      'magnum', 'neutron', 'nova', 'octavia', 'placement']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::management"

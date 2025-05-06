@@ -11,30 +11,33 @@ class role::balancer::services {
     'value_type' => Hash[String, Hash],
   })
 
-  if($regionless or ($::facts['openstack'] and $::facts['openstack']['region'])) {
+  if($regionless or ($::facts['ntnu'] and $::facts['ntnu']['region'])) {
     $region = lookup('ntnuopenstack::region')
-    $keystone_region = lookup('ntnuopenstack::keystone::region')
+    $keystone_region = lookup('ntnuopenstack::keystone::region', {
+      'default_value' => undef,
+      'value_type'    => Optional[String],
+    })
 
     include ::profile::bird
     include ::profile::services::haproxy
 
-    $servicenames = ['barbican', 'cinder', 'glance', 'heat', 'magnum', 'neutron',
-      'nova', 'octavia', 'placement', 'swift']
+    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 'magnum',
+      'neutron', 'nova', 'octavia', 'placement', 'swift']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::services"
       }
     }
 
-    $horizon = lookup('ntnuopenstack::horizon::django_secret', {
-      'default_value' => undef,
-      'value_type'    => Optional[String],
+    $horizon = lookup('ntnuopenstack::horizon::enabled', {
+      'default_value' => true,
+      'value_type'    => Boolean,
     })
     if($horizon) {
       include ::ntnuopenstack::horizon::haproxy::frontend
     }
 
-    if($keystone_region == $region) {
+    if($keystone_region == undef or $keystone_region == $region) {
       include ::ntnuopenstack::keystone::haproxy::services
     }
 
