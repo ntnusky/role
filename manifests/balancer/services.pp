@@ -21,7 +21,7 @@ class role::balancer::services {
     include ::profile::bird
     include ::profile::services::haproxy
 
-    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 'magnum',
+    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat',
       'neutron', 'nova', 'octavia', 'placement', 'swift']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
