@@ -3,6 +3,11 @@ class role::balancer::services {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  $servicenames = lookup('role::balancer::openstack::services', {
+    'default_value' => ['barbican', 'cinder', 'designate', 'glance', 'heat', 'magnum',
+                        'neutron', 'nova', 'octavia', 'placement', 'swift'],
+    'value_type'    => Array[String],
+  })
   $regionless = lookup('profile::region::missing::ok', {
     'default_value' => false,
     'value_type'    => Boolean,
@@ -21,8 +26,6 @@ class role::balancer::services {
     include ::profile::bird
     include ::profile::services::haproxy
 
-    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 'magnum',
-      'neutron', 'nova', 'octavia', 'placement', 'swift']
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::services"

@@ -3,6 +3,11 @@ class role::balancer::management {
   include ::profile::baseconfig
   include ::profile::baseconfig::users
 
+  $servicenames = lookup('role::balancer::openstack::services', {
+    'default_value' => ['barbican', 'cinder', 'designate', 'glance', 'heat',
+                        'magnum', 'neutron', 'nova', 'octavia', 'placement'],
+    'value_type'    => Array[String],
+  })
   $regionless = lookup('profile::region::missing::ok', {
     'default_value' => false,
     'value_type'    => Boolean,
@@ -44,10 +49,10 @@ class role::balancer::management {
     if($puppetdb) {
       include ::profile::services::puppet::db::haproxy::frontend
     }
-  
+
     $shiftleader = lookup('profile::haproxy::shiftleader::enable', {
       'default_value' => true,
-      'value_type'    => Boolean, 
+      'value_type'    => Boolean,
     })
     if($shiftleader) {
       include ::profile::services::shiftleader::haproxy::frontend
@@ -56,9 +61,7 @@ class role::balancer::management {
     if($keystone_region == undef or $keystone_region == $region) {
       include ::ntnuopenstack::keystone::haproxy::management
     }
-  
-    $servicenames = ['barbican', 'cinder', 'designate', 'glance', 'heat', 
-      'magnum', 'neutron', 'nova', 'octavia', 'placement']
+
     $servicenames.each | $service | {
       if($region in $services and $service in $services[$region]['services']) {
         include "::ntnuopenstack::${service}::haproxy::management"
