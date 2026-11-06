@@ -5,7 +5,7 @@ class role::balancer::management {
 
   $servicenames = lookup('role::balancer::openstack::services', {
     'default_value' => ['barbican', 'cinder', 'designate', 'glance', 'heat',
-                        'magnum', 'neutron', 'nova', 'octavia', 'placement'],
+                        'neutron', 'nova', 'octavia', 'placement'],
     'value_type'    => Array[String],
   })
   $regionless = lookup('profile::region::missing::ok', {
